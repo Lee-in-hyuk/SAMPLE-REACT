@@ -2,8 +2,13 @@
 import './App.css';
 import { useState, useRef } from 'react';
 import Counter from './components/Counter';
+import useInputs from './hooks/useInputs';
 
 function App() {
+  const [ { username, email }, onChange, reset ] = useInputs({
+    username:'',
+    email:''
+  });
   // useState공부
   // const [ text, setText ] = useState('금요일');
   // console.log(useState('금요일')); // useState는 배열형태로 찍히고, 0번째 index에는 '금요일'이 찍힘.
@@ -31,7 +36,15 @@ function App() {
         <input name='username' ref={usernameIn}/>
         <button onClick={onClick}>인풋의 value가져오기</button>
       </p>
+      <hr/>
       <Counter/>
+      <hr/>
+      <p>username : {username} <br/> email : {email}</p>
+      <p>
+        <input name='username' value={username} onChange={onChange}/>
+        <input name='email' value={email} onChange={onChange}/>
+        <button onClick={reset}>reset</button>
+        </p>
     </div>
   );
 }
